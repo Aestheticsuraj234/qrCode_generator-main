@@ -28,7 +28,15 @@ export const QrCodeProvider = ({ children }) => {
   const [qrCodeEnableLinearGradient, setQRCodeEnableLinearGradient] = useState(false);
   const [qrCodeGradientDirection, setQRCodeGradientDirection] = useState(['10%', '90%', '0', '0']);
   const [qrCodeLinearGradient, setQRCodeLinearGradient] = useState( [color1,color2]);
-  
+  // !App link
+  const [appLink , setApplink] = useState("");
+  const [musicLink , setMusicLink] = useState("");
+  const [facebookLink , setFacebookLink] = useState("");
+  const [youtubeLink , setYoutubeLink] = useState("");
+  const [whatsAppLink , setWhatsAppLink] = useState("");
+  const [twitterLink , setTwitterLink] = useState("");
+  const [instagramLink , setInstagramLink] = useState("");
+  const [linkedIn , setLinkedIn] = useState("");
 // !-----------For-Generating-Url -------------------
   const generateQRCode = () => {
     if (!input) {
@@ -59,6 +67,44 @@ export const QrCodeProvider = ({ children }) => {
  // !-----------For-Generating-Vcard -------------------
   const generateContactQRCode = (vcard) => {
     setQR(vcard)
+  };
+
+ // !-----------For-Generating-App -------------------
+  const generateAppQRCode = () => {
+
+    setQR(appLink)
+  };
+
+ // !-----------For-Generating-musicLink -------------------
+  const generateMusicQRCode = () => {
+
+    setQR(musicLink)
+  };
+
+
+  const generateFbQRCode = () => {
+
+    setQR(facebookLink)
+  };
+  const generateYTQRCode = () => {
+
+    setQR(youtubeLink)
+  };
+  const generateWPQRCode = () => {
+
+    setQR(whatsAppLink)
+  };
+  const generateTWQRCode = () => {
+
+    setQR(twitterLink)
+  };
+  const generateINSTAQRCode = () => {
+
+    setQR(instagramLink)
+  };
+  const generateLinkedInQRCode = () => {
+
+    setQR(linkedIn)
   };
 
   const navigateToEdit = () => navigation.navigate('/Edit-QR')
@@ -134,7 +180,16 @@ export const QrCodeProvider = ({ children }) => {
         color2,
         setColor1,
         setColor2,
-        setQRCodeBackgroundColor
+        setQRCodeBackgroundColor,
+        generateAppQRCode,
+        appLink , setApplink,
+        musicLink , setMusicLink,generateMusicQRCode,
+        facebookLink,setFacebookLink,generateFbQRCode,
+        youtubeLink,generateYTQRCode,setYoutubeLink,
+        whatsAppLink , setWhatsAppLink , generateWPQRCode,
+        twitterLink , setTwitterLink , generateTWQRCode,
+        instagramLink , setInstagramLink , generateINSTAQRCode,
+        linkedIn , setLinkedIn  , generateLinkedInQRCode
       }}
     >
       {children}

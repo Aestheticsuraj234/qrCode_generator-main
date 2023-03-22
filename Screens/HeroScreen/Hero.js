@@ -78,30 +78,30 @@ const Hero = () => {
                         }}>Social Media QR Codes</Text>
                     </View>
                     <View style={styles.SocialCategory}>
-                        <View style={styles.SocialCategoryBox}>
+                        <Pressable onPress={() => navigation.navigate('FB-QR')} style={styles.SocialCategoryBox}>
                             <AntDesign name="facebook-square" size={24} color="#4267B2" />
                             <Text style={{ fontWeight: 'bold', fontSize: 12, color: '#395365' }}>Facebook</Text>
-                        </View>
-                        <View style={styles.SocialCategoryBox}>
+                        </Pressable>
+                        <Pressable onPress={() => navigation.navigate('YT-QR')} style={styles.SocialCategoryBox}>
                             <AntDesign name="youtube" size={24} color="#f00000" />
                             <Text style={{ fontWeight: 'bold', fontSize: 12, color: '#395365' }}>Youtube</Text>
-                        </View>
-                        <View style={styles.SocialCategoryBox}>
+                        </Pressable>
+                        <Pressable onPress={() => navigation.navigate('INSTA-QR')} style={styles.SocialCategoryBox}>
                             <AntDesign name="instagram" size={24} color="#fcaf45" />
                             <Text style={{ fontWeight: 'bold', fontSize: 12, color: '#395365' }}>Instagram</Text>
-                        </View>
-                        <View style={styles.SocialCategoryBox}>
+                        </Pressable>
+                        <Pressable onPress={() => navigation.navigate('LinkedIN-QR')} style={styles.SocialCategoryBox}>
                             <AntDesign name="linkedin-square" size={24} color="#0077b5" />
                             <Text style={{ fontWeight: 'bold', fontSize: 12, color: '#395365' }}>linkedIn</Text>
-                        </View>
-                        <View style={styles.SocialCategoryBox}>
+                        </Pressable>
+                        <Pressable onPress={() => navigation.navigate('TW-QR')} style={styles.SocialCategoryBox}>
                             <Entypo name="twitter-with-circle" size={24} color="#1da1f2" />
                             <Text style={{ fontWeight: 'bold', fontSize: 12, color: '#395365' }}>Twitter</Text>
-                        </View>
-                        <View style={styles.SocialCategoryBox}>
+                        </Pressable>
+                        <Pressable onPress={() => navigation.navigate('WP-QR')} style={styles.SocialCategoryBox}>
                             <FontAwesome5 name="whatsapp-square" size={24} color="#47d923" />
                             <Text style={{ fontWeight: 'bold', fontSize: 12, color: '#395365' }}>whatsapp</Text>
-                        </View>
+                        </Pressable>
 
                     </View>
                 </View>
