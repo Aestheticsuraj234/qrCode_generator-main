@@ -2,7 +2,6 @@ import { Pressable, StyleSheet, Text, TextInput, View, ScrollView, RefreshContro
 
 import QRCodeComponent from '../../Components/QRCodeComponent';
 
-import { useEffect } from 'react'
 
 import { useContext, useState, useCallback } from 'react';
 
@@ -93,6 +92,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginBottom: 30
   },
+
 
   input: {
     paddingVertical: 8,
