@@ -3,6 +3,9 @@ import React, { useContext, useState, useCallback, useEffect } from 'react';
 import QRCodeComponent from '../../Components/QRCodeComponent';
 import { QrCodeContext } from '../../context/QrCodeContext';
 import { useNavigation, useIsFocused } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const STORAGE_KEY = 'MAIL_QR_CODE';
 
 const MailScreen = () => {
     const navigation = useNavigation();
@@ -10,7 +13,9 @@ const MailScreen = () => {
     const [subject, setSubject] = useState('');
     const [body, setBody] = useState('');
     const [refreshing, setRefreshing] = useState(false);
+    const [qrCodeValue, setQRCodeValue] = useState(null);
 
+   
     const { generateMailQRCode, saveQRCode, QR, setQRref, setQR } = useContext(QrCodeContext);
 
     const isFocused = useIsFocused();
@@ -23,7 +28,13 @@ const MailScreen = () => {
         const emailContent = `mailto:${recipient}?subject=${encodeURIComponent(
             subject
         )}&body=${encodeURIComponent(body)}`;
-        generateMailQRCode(emailContent);
+        const qrCode = generateMailQRCode(emailContent);
+        setQRCodeValue(qrCode);
+        if (qrCode) {
+            AsyncStorage.setItem(STORAGE_KEY, qrCode); // Save the QR code in storage
+        } else {
+            AsyncStorage.removeItem(STORAGE_KEY); // Remove the QR code from storage if qrCode is null or undefined
+        }
     };
 
     const onRefresh = useCallback(() => {
@@ -35,11 +46,13 @@ const MailScreen = () => {
         setSubject("");
         setBody("");
         setQR("");
+        setQRCodeValue(null);
+        AsyncStorage.removeItem(STORAGE_KEY); // Remove the QR code from storage
     }, []);
 
     useEffect(() => {
         if (isFocused) {
-            setQR("");
+            AsyncStorage.getItem(STORAGE_KEY).then(qrCode => setQRCodeValue(qrCode)); // Retrieve the QR code from storage
         }
     }, [isFocused]);
 

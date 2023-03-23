@@ -3,8 +3,6 @@ import * as FileSystem from "expo-file-system";
 import * as MediaLibrary from "expo-media-library";
 import Toast from 'react-native-root-toast';
 export const QrCodeContext = createContext()
-import { navigationRef } from '../App';
-
 export const QrCodeProvider = ({ children }) => {
   // Url Screen
   const [QR, setQR] = useState(null);
@@ -60,11 +58,9 @@ export const QrCodeProvider = ({ children }) => {
 
  // !-----------For Generating mail -------------------
   const generateMailQRCode = (emailContent) => {
-    if (navigationRef.current?.getCurrentRoute()?.name === 'Mail-QR') {
+    
       setQR(emailContent);
-    } else {
-      setQR(null); // if you don't want any pre-rendered QR code
-    }
+
   };
 
   
