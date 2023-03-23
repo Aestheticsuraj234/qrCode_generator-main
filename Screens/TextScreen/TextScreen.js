@@ -2,7 +2,7 @@ import { Pressable, StyleSheet, Text, TextInput, View, ScrollView, RefreshContro
 
 import QRCodeComponent from '../../Components/QRCodeComponent';
 
-import { useContext, useState, useCallback } from 'react';
+import { useContext, useState, useCallback ,  useEffect } from 'react';
 import { QrCodeContext } from '../../context/QrCodeContext'
 import { useNavigation } from '@react-navigation/native';
 
@@ -18,6 +18,14 @@ export default function TextScreen() {
     setText("")
   }, []);
 
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+        // Clear the QR code when the screen comes into focus
+        setQR("");
+    });
+
+    return unsubscribe;
+}, [navigation]);
 
   const maxChars = 300;
   const {  clearQRCode,

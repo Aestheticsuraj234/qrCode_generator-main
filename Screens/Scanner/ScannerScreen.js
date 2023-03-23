@@ -25,6 +25,14 @@ const ScannerScreen = () => {
     if (hasPermission === false) {
         return <Text>No access to camera</Text>;
     }
+    useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            // Clear the QR code when the screen comes into focus
+            setQR("");
+        });
+
+        return unsubscribe;
+    }, [navigation]);
 
     return (
         <View style={{ backgroundColor: "#ecf2ff", flex: 1 }}>

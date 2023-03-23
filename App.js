@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback , createRef } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SignUp from './Screens/Authentication/SignUp/SignUp'
@@ -22,11 +22,12 @@ import YoutubeScreen from './Screens/YoutubeScreen/YoutubeScreen';
 
 
 const Stack = createNativeStackNavigator();
+export const navigationRef = createRef();
 function App() {
 
   return (
     <QrCodeProvider>
-      <NavigationContainer>
+      <NavigationContainer ref={navigationRef}>
         <Stack.Navigator>
           {/* <Stack.Screen name="SignUp" component={SignUp} /> */}
           {/* <Stack.Screen name="Login" component={Login} /> */}

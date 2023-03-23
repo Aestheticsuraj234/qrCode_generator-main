@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, TextInput, Pressable, ScrollView, RefreshControl } from 'react-native';
-import React, { useContext, useState, useCallback } from 'react';
+import React, { useContext, useState, useCallback , useEffect } from 'react';
 import QRCodeComponent from '../../Components/QRCodeComponent';
 import { QrCodeContext } from '../../context/QrCodeContext';
 import { useNavigation } from '@react-navigation/native';
@@ -57,6 +57,16 @@ const ContactScreen = () => {
 
         generateContactQRCode(vCardUrl);
     };
+
+    useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            // Clear the QR code when the screen comes into focus
+            setQR("");
+        });
+
+        return unsubscribe;
+    }, [navigation]);
+
 
 
     return (

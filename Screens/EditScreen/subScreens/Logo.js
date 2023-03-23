@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Pressable, Image, ScrollView, RefreshControl, TouchableOpacity } from 'react-native';
-import React, { useContext, useState, useCallback } from 'react';
+import React, { useContext, useState, useCallback  , useEffect} from 'react';
 import QRCodeComponent from '../../../Components/QRCodeComponent';
 import { QrCodeContext } from '../../../context/QrCodeContext';
 import * as ImagePicker from 'expo-image-picker';

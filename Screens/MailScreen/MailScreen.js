@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View, TextInput, Pressable, ScrollView, RefreshControl } from 'react-native';
-import React, { useContext, useState, useCallback } from 'react';
+import React, { useContext, useState, useCallback, useEffect } from 'react';
 import QRCodeComponent from '../../Components/QRCodeComponent';
 import { QrCodeContext } from '../../context/QrCodeContext';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useIsFocused } from '@react-navigation/native';
 
 const MailScreen = () => {
     const navigation = useNavigation();
@@ -12,6 +12,9 @@ const MailScreen = () => {
     const [refreshing, setRefreshing] = useState(false);
 
     const { generateMailQRCode, saveQRCode, QR, setQRref, setQR } = useContext(QrCodeContext);
+
+    const isFocused = useIsFocused();
+
     const handleGenerateQRCode = () => {
         if (!recipient || !subject || !body) {
             alert('Please fill all fields to generate QR code');
@@ -23,18 +26,22 @@ const MailScreen = () => {
         generateMailQRCode(emailContent);
     };
 
-
     const onRefresh = useCallback(() => {
         setRefreshing(true);
         setTimeout(() => {
             setRefreshing(false);
         }, 2000);
-        setRecipient("")
-        setSubject("")
-        setBody("")
-        setQR("")
+        setRecipient("");
+        setSubject("");
+        setBody("");
+        setQR("");
     }, []);
 
+    useEffect(() => {
+        if (isFocused) {
+            setQR("");
+        }
+    }, [isFocused]);
 
     return (
         <ScrollView
@@ -45,16 +52,16 @@ const MailScreen = () => {
         >
             <View style={styles.mainContainer}>
                 {/* QR Code */}
-                {QR && (
+                {QR && isFocused && (
                     <View style={styles.qr}>
                         <Pressable onPress={saveQRCode}>
                             <QRCodeComponent size={140} logoSize={100} qrCodeValue={QR} getRef={setQRref} backgroundColor="#fff" />
                         </Pressable>
                     </View>
                 )}
-                {QR && <Text onPress={() => navigation.navigate('Edit-QR')} style={{ color: 'green', fontWeight: 'bold', paddingVertical: 20 }}>Edit QR</Text>}
+                {QR && isFocused && <Text onPress={() => navigation.navigate('Edit-QR')} style={{ color: 'green', fontWeight: 'bold', paddingVertical: 20 }}>Edit QR</Text>}
 
-                {QR && <Text style={styles.instraction}>Click The <Text style={styles.instraicon}>QR</Text> Code to save it</Text>}
+                {QR && isFocused && <Text style={styles.instraction}>Click The <Text style={styles.instraicon}>QR</Text> Code to save it</Text>}
 
                 {/* Form Container */}
                 <View style={styles.formContainer}>
@@ -91,6 +98,7 @@ const MailScreen = () => {
 };
 
 export default MailScreen;
+
 
 const styles = StyleSheet.create({
     mainContainer: {
